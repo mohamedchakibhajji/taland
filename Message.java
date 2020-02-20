@@ -7,24 +7,15 @@ package Entity;
 
 /**
  *
- * @author Amine
+ * @author acer
  */
 public class Message {
-    int idmessage;
-    int idU;
-    int idreceiver;
-    String contenu;
-    int etatmessage=0;
-
-    public Message() {
-    }
-
-    public Message(int idmessage, int idU, int idreceiver, String contenu) {
-        this.idmessage = idmessage;
-        this.idU = idU;
-        this.idreceiver = idreceiver;
-        this.contenu = contenu;
-    }
+    private int idmessage;
+    private int idU;
+    private int idreceiver;
+    private String contenu;
+    private int etatmessage;
+    
 
     public int getIdmessage() {
         return idmessage;
@@ -41,6 +32,8 @@ public class Message {
     public String getContenu() {
         return contenu;
     }
+
+
 
     public int getEtatmessage() {
         return etatmessage;
@@ -62,19 +55,23 @@ public class Message {
         this.contenu = contenu;
     }
 
+
     public void setEtatmessage(int etatmessage) {
         this.etatmessage = etatmessage;
     }
 
-    @Override
-    public String toString() {
-        return "Message{" + "idmessage=" + idmessage + ", idU=" + idU + ", idreceiver=" + idreceiver + ", contenu=" + contenu + ", etatmessage=" + etatmessage + '}';
+
+
+    public Message() {
     }
 
-    
-    
-    
-    
+    public Message(int idmessage, int idU, int idreceiver, String contenu, int etatmessage) {
+        this.idmessage = idmessage;
+        this.idU = idU;
+        this.idreceiver = idreceiver;
+        this.contenu = contenu;
+        this.etatmessage = etatmessage;
+    }
     
     
 }

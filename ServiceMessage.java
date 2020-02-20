@@ -3,85 +3,83 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Service;
+package Services;
 
 import Entity.Message;
-import Entity.Users;
-import Entity.javamail;
+import Interfaces.IServiceDeals;
 import Interfaces.IServiceMessage;
-import java.sql.Connection;
+import utils.MaConnection;
+import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import utils.MaConnection;
+import jdk.nashorn.internal.objects.NativeRegExp;
 
 /**
  *
- * @author Amine
+ * @author acer
  */
 public class ServiceMessage implements IServiceMessage{
-    private Connection cnx;
+        private Connection cnx;
     private Statement st;
     private PreparedStatement pst;
+    private PreparedStatement pst1;
     private ResultSet rs;
-
-    public ServiceMessage() {
-        cnx = MaConnection.getInstance().getConnection();
-        
-
-    }
-    @Override
-    public void sendMesage(Message m) throws SQLException {
-        try {
-                {
-                   /* String[] args = null;
-
-                    javamail.main(args);*/
-                    String req = "insert into message (idmessage,idU,idreceiver,contenu) "+ "values(?,?,?,?)";
-                    
-
-                    pst = cnx.prepareStatement(req);
-                    pst.setInt(1, m.getIdmessage()); //1ere pt d'interrogation 
-                    pst.setInt(2, m.getIdU());
-                    pst.setInt(3, m.getIdreceiver());
-                    pst.setString(4, m.getContenu());
-                 
-
-                }
-
-                pst.executeUpdate();
-                System.out.println("ajout message");
-            
-
-            } catch (SQLException ex) {
-                System.out.println("erreur ajout message");;
-            }
+    public ServiceMessage()
+  {
+      cnx=MaConnection.getInstance().getConnection();
       
-    }
-
+  }
+    
     @Override
-    public void displayMessage() throws SQLException {
-        String req = "select * from message  ";
+    public void addMessage(Message m )  {
+     
+        try {    
+    {   
+        String req="insert into message (idmessage,idU,idreceiver,contenu,etatmessage) values(?,?,?,?,?)";
+     
+            pst1=cnx.prepareStatement(req);
+            pst1.setInt(1, m.getIdmessage()); 
+            pst1.setInt(2, m.getIdU()); 
+            pst1.setInt(3, m.getIdreceiver());
+            pst1.setString(4, m.getContenu()); 
+            pst1.setInt(5, m.getEtatmessage()); 
+            
+           
+  } 
+          
+       
+           pst1.executeUpdate();
+        } catch (SQLException ex) {
+            
+        }
+        
+    }
+    
+    
+    @Override
+     public void displayMessage() throws SQLException{
+     
+       String req="select * from message ";
         try {
             Statement stm = cnx.createStatement();
-            ResultSet rs = stm.executeQuery(req);
-
-            while (rs.next()) //  list.add(new Talentueux(rs.getString("Talent"),rs.getInt("NumTel"), rs.getString("Email"), rs.getString("DateNaissance")); //soit le nom de la colonne soit l'indice
-            {
-                System.out.println("Idmessage : " + rs.getInt("idmessage") + "  Idsender :" + rs.getInt("idU") + "  Idreceivere :" + 
-                        rs.getInt("idreceiver") + "  Content :" + rs.getString("contenu"));
-                        
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ServiceUsers.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+            ResultSet rs=stm.executeQuery(req);
+       
+     while(rs.next())
     
-
-    
-}
+       
+       System.out.println("Fromc"+rs.getInt("idU") +"  ---> TO :"+rs.getInt("idreceiver")+ " ====== " +  rs.getString("contenu") );
  
+      
+  
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceMessage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }
+}

@@ -4,16 +4,16 @@
  * and open the template in the editor.
  */
 package Interfaces;
-import Entity.Users;
+
 import Entity.Message;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
- * @author Amine
+ * @author acer
  */
 public interface IServiceMessage {
-    public void sendMesage(Message m) throws SQLException;
+    public void addMessage(Message m) throws SQLException;
     public void displayMessage() throws SQLException;
-    
 }

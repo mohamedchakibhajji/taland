@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="1030.0" prefWidth="1560.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CompetitionsController">
+  <children>
+    <Label fx:id="label" layoutX="187.0" layoutY="141.0" text="competitions" textFill="WHITE">
+         <font>
+            <Font size="76.0" />
+         </font></Label>
+  </children>
+</AnchorPane>

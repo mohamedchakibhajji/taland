@@ -1,12 +1,23 @@
-package api;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package utils;
 import java.awt.*;
 import java.awt.TrayIcon.MessageType;
 
-public class TrayIconDemo {
+/**
+ *
+ * @author Chekib
+ */
+
+
+public class Notification {
 
     public static void main(String[] args) throws AWTException {
         if (SystemTray.isSupported()) {
-            TrayIconDemo td = new TrayIconDemo();
+            Notification td = new Notification();
             td.displayTray();
         } else {
             System.err.println("System tray not supported!");
@@ -18,7 +29,7 @@ public class TrayIconDemo {
         SystemTray tray = SystemTray.getSystemTray();
 
         //If the icon is a file
-        Image image = Toolkit.getDefaultToolkit().createImage("notify.png");
+        Image image = Toolkit.getDefaultToolkit().createImage("icon.gif");
         //Alternative (if the icon is on the classpath):
         //Image image = Toolkit.getDefaultToolkit().createImage(getClass().getResource("icon.png"));
 
@@ -29,6 +40,7 @@ public class TrayIconDemo {
         trayIcon.setToolTip("System tray icon demo");
         tray.add(trayIcon);
 
-        trayIcon.displayMessage("Bienvenue", "Votre compte a ete creer avex succes ", MessageType.INFO);
+        trayIcon.displayMessage("Participation Validé", "Vous Trouverez Votre Ticket Sur Votre PC", MessageType.INFO);
+        
     }
 }

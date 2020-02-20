@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="bigAnchorPane" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.listutulisateurs">
+   <children>
+      <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../uploads/1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../uploads/2.png" />
+         </image>
+      </ImageView>
+      <Pane fx:id="navePane" prefHeight="1080.0" prefWidth="360.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="235.0" fitWidth="220.0" layoutX="54.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Untitled-1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="82.0" fitWidth="107.0" layoutX="22.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../Downloads/capture.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="141.0" layoutY="57.0" text="user namme" textFill="WHITE">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="141.0" layoutY="88.0" text="\@category" textFill="WHITE">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnHome" graphicTextGap="30.0" layoutX="-24.0" layoutY="351.0" mnemonicParsing="false" onAction="#btnHomeAction" prefHeight="89.0" prefWidth="262.0" stylesheets="@../StyleSheets/main.css" text="Home">
+               <styleClass>
+                  <String fx:value="navBtn" />
+                  <String fx:value="navIcon" />
+               </styleClass>
+               <graphic>
+                  <ImageView fitHeight="34.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" styleClass="navIcon">
+                     <image>
+                        <Image url="@../uploads/Blueicons/sydney-opera-houhse.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnCompettions" graphicTextGap="30.0" layoutX="-5.0" layoutY="440.0" mnemonicParsing="false" onAction="#btnCompetitionsAction" prefHeight="89.0" prefWidth="324.0" stylesheets="@../StyleSheets/main.css" text="Competitions">
+               <styleClass>
+                  <String fx:value="navBtn" />
+                  <String fx:value="navIcon" />
+               </styleClass>
+               <graphic>
+                  <ImageView fitHeight="34.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" styleClass="navIcon">
+                     <image>
+                        <Image url="@../uploads/Blueicons/medal1.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnEvents" graphicTextGap="30.0" layoutX="-17.0" layoutY="529.0" mnemonicParsing="false" onAction="#btnEventsAction" prefHeight="89.0" prefWidth="262.0" stylesheets="@../StyleSheets/main.css" text="Events">
+               <styleClass>
+                  <String fx:value="navBtn" />
+                  <String fx:value="navIcon" />
+               </styleClass>
+               <graphic>
+                  <ImageView fitHeight="34.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" styleClass="navIcon">
+                     <image>
+                        <Image url="@../uploads/Blueicons/event1.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnDeals" graphicTextGap="30.0" layoutX="-23.0" layoutY="618.0" mnemonicParsing="false" onAction="#btnDealsAction" prefHeight="89.0" prefWidth="262.0" stylesheets="@../StyleSheets/main.css" text="Deals">
+               <styleClass>
+                  <String fx:value="navBtn" />
+                  <String fx:value="navIcon" />
+               </styleClass>
+               <graphic>
+                  <ImageView fitHeight="34.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" styleClass="navIcon">
+                     <image>
+                        <Image url="@../uploads/Blueicons/deal1.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnStore" graphicTextGap="30.0" layoutX="-25.0" layoutY="699.0" mnemonicParsing="false" onAction="#btnStoreAction" prefHeight="89.0" prefWidth="262.0" stylesheets="@../StyleSheets/main.css" text="Store">
+               <styleClass>
+                  <String fx:value="navBtn" />
+                  <String fx:value="navIcon" />
+               </styleClass>
+               <graphic>
+                  <ImageView fitHeight="34.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" styleClass="navIcon">
+                     <image>
+                        <Image url="@../uploads/Blueicons/supermarket1.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnPosts" graphicTextGap="30.0" layoutX="-20.0" layoutY="788.0" mnemonicParsing="false" onAction="#btnPostsAction" prefHeight="89.0" prefWidth="262.0" stylesheets="@../StyleSheets/main.css" text="Posts">
+               <styleClass>
+                  <String fx:value="navBtn" />
+                  <String fx:value="navIcon" />
+               </styleClass>
+               <graphic>
+                  <ImageView fitHeight="34.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" styleClass="navIcon">
+                     <image>
+                        <Image url="@../uploads/Blueicons/blog%201.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnSettings" graphicTextGap="30.0" layoutX="-5.0" layoutY="877.0" mnemonicParsing="false" onAction="#btnSettingsAction" prefHeight="89.0" prefWidth="262.0" stylesheets="@../StyleSheets/main.css" text="Settings">
+               <styleClass>
+                  <String fx:value="navBtn" />
+                  <String fx:value="navIcon" />
+               </styleClass>
+               <graphic>
+                  <ImageView fitHeight="34.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" styleClass="navIcon">
+                     <image>
+                        <Image url="@../uploads/Blueicons/settings1.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnLogout" graphicTextGap="30.0" layoutX="-12.0" layoutY="966.0" mnemonicParsing="false" onAction="#btnLogoutAction" prefHeight="89.0" prefWidth="262.0" stylesheets="@../StyleSheets/main.css" text="Logout">
+               <styleClass>
+                  <String fx:value="navBtn" />
+                  <String fx:value="navIcon" />
+               </styleClass>
+               <graphic>
+                  <ImageView fitHeight="34.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" styleClass="navIcon">
+                     <image>
+                        <Image url="@../uploads/Blueicons/logout1.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+      <AnchorPane fx:id="mainPane" layoutX="362.0" layoutY="56.0" prefHeight="1024.0" prefWidth="1558.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="362.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+         <children>
+            <TableView fx:id="tableview" layoutX="145.0" layoutY="223.0" prefHeight="641.0" prefWidth="1081.0">
+              <columns>
+                <TableColumn fx:id="colid" prefWidth="44.0" text="id" />
+                  <TableColumn fx:id="colusername" prefWidth="130.0" text="Username" />
+                <TableColumn fx:id="colfirstname" prefWidth="137.0" text="Firstname" />
+                  <TableColumn fx:id="collastname" prefWidth="126.0" text="Lastname" />
+                  <TableColumn fx:id="colemail" prefWidth="236.0" text="Email" />
+                  <TableColumn fx:id="colbirthdate" prefWidth="131.0" text="Birthdate" />
+                  <TableColumn fx:id="colsexe" minWidth="7.0" prefWidth="100.0" text="Sexe" />
+                  <TableColumn fx:id="colbiography" prefWidth="175.0" text="Biography" />
+              </columns>
+            </TableView>
+            <Button fx:id="btndeleteuser" graphicTextGap="30.0" layoutX="1197.0" layoutY="459.0" mnemonicParsing="false" onAction="#deleteuser" prefHeight="89.0" prefWidth="324.0" stylesheets="@../StyleSheets/main.css" text="Delete user">
+               <styleClass>
+                  <String fx:value="navBtn" />
+                  <String fx:value="navIcon" />
+               </styleClass>
+            </Button>
+            <TextField fx:id="searchbar" alignment="CENTER" layoutX="522.0" layoutY="114.0" onKeyPressed="#search" prefHeight="48.0" prefWidth="360.0" promptText="Search" stylesheets="@../StyleSheets/main.css">
+               <styleClass>
+                  <String fx:value="navBtn" />
+                  <String fx:value="txtField" />
+                  <String fx:value="navIcon" />
+               </styleClass>
+            </TextField>
+            <Button fx:id="btnexportexcel" graphicTextGap="30.0" layoutX="795.0" layoutY="896.0" mnemonicParsing="false" onAction="#exportexcel" prefHeight="89.0" prefWidth="324.0" stylesheets="@../StyleSheets/main.css" text="Export excel">
+               <styleClass>
+                  <String fx:value="navBtn" />
+                  <String fx:value="navIcon" />
+               </styleClass>
+            </Button>
+         </children></AnchorPane>
+      <Button fx:id="btnExit" layoutX="1866.0" minWidth="53.0" mnemonicParsing="false" onAction="#btnExitAction" prefHeight="57.0" prefWidth="53.0" styleClass="navBtn" stylesheets="@../StyleSheets/main.css">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../uploads/Blueicons/cancel%20(1).png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="1784.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="66.0" styleClass="navBtn" stylesheets="@../StyleSheets/main.css" />
+      <ImageView fx:id="btnNotification" fitHeight="60.0" fitWidth="65.0" layoutX="1793.0" layoutY="3.0" onDragDetected="#btnNotificationAction" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../uploads/Blueicons/notif.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

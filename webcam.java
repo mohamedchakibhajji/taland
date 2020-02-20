@@ -3,26 +3,36 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entity;
+package utils;
+
+/**
+ *
+ * @author Chekib
+ */
 
 import com.github.sarxos.webcam.Webcam;
-import java.awt.image.BufferedImage;
+import com.github.sarxos.webcam.WebcamResolution;
+import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-/**
- *
- * @author Amine
- */
 public class webcam {
+    
     public static void main(String[] args) throws IOException {
        Webcam w = Webcam.getDefault();
-w.getLock().disable();
+       
+       for(Dimension supportedSize :w.getViewSizes()){
+           System.out.println(supportedSize.toString());
+       }
+       w.setViewSize(WebcamResolution.VGA.getSize());
+       
+       w.getLock().disable();
 w.open();
 ImageIO.write(w.getImage(), "JPG", new File("capture.png"));
+w.close();
 
         
     }
-    
+   
 }

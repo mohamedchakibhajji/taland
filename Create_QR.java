@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entity;
+package utils;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,13 +15,13 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 /**
  *
- * @author mazen
+ * @author Amine
  */
 public class Create_QR {
   public static void main(String[] args) {
         try {
-            String qrCodeData = "www.chillyfacts.com";
-            String filePath = "C:\\Users\\Amine\\Documents\\NetBeansProjects\\Taland\\codeqr.png";
+            String qrCodeData = "www.chillyfacts.com"; 
+            String filePath = "C:\\Users\\Amine\\Documents\\Python Scripts\\pidev\\Taland\\codeqr.png";
             String charset = "UTF-8"; // or "ISO-8859-1"
             Map < EncodeHintType, ErrorCorrectionLevel > hintMap = new HashMap < EncodeHintType, ErrorCorrectionLevel > ();
             hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
