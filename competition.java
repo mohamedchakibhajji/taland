@@ -23,6 +23,43 @@ public class competition {
     int etat ; 
     int nbrspec;
     int nbrparticipant;
+    String photo;
+    int idU;
+
+    public int getIdU() {
+        return idU;
+    }
+
+    public void setIdU(int idU) {
+        this.idU = idU;
+    }
+
+    public competition(int idcomp, String namecomp, String desccomp, int nbrmaxspec, int nbrmaxpar, String location, String startingdate, String endingdate, float pricecomp, int idcat, int etat, int nbrspec, int nbrparticipant, String photo,int idU) {
+        this.idcomp = idcomp;
+        this.namecomp = namecomp;
+        this.desccomp = desccomp;
+        this.nbrmaxspec = nbrmaxspec;
+        this.nbrmaxpar = nbrmaxpar;
+        this.location = location;
+        this.startingdate = startingdate;
+        this.endingdate = endingdate;
+        this.pricecomp = pricecomp;
+        this.idcat = idcat;
+        this.etat = etat;
+        this.nbrspec = nbrspec;
+        this.nbrparticipant = nbrparticipant;
+        this.photo = photo;
+        this.idU=idU;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+  
 
     public void setNbrspec(int nbrspec) {
         this.nbrspec = nbrspec;
@@ -130,10 +167,12 @@ public class competition {
 
     @Override
     public String toString() {
-        return "competition{" + " namecomp=" + namecomp + ", desccomp=" + desccomp + ", nbrmaxspec=" + nbrmaxspec + ", nbrmaxpar=" + nbrmaxpar + ", location=" + location + ", startingdate=" + startingdate + ", endingdate=" + endingdate + ", pricecomp=" + pricecomp + ", idcat=" + idcat + ", etat=" + etat + " nbrspec=" + nbrspec + " nbrparticipant=" + nbrparticipant + '}';
+        return "competition{" + "idcomp=" + idcomp + ", namecomp=" + namecomp + ", desccomp=" + desccomp + ", nbrmaxspec=" + nbrmaxspec + ", nbrmaxpar=" + nbrmaxpar + ", location=" + location + ", startingdate=" + startingdate + ", endingdate=" + endingdate + ", pricecomp=" + pricecomp + ", idcat=" + idcat + ", etat=" + etat + ", nbrspec=" + nbrspec + ", nbrparticipant=" + nbrparticipant + ", photo=" + photo+  '}';
     }
 
-    public competition(String namecomp, String desccomp, int nbrmaxspec, int nbrmaxpar, String location, String startingdate, String endingdate, float pricecomp, int idcat, int etat) {
+   
+
+    public competition(String namecomp, String desccomp, int nbrmaxspec, int nbrmaxpar, String location, String startingdate, String endingdate, float pricecomp, int idcat, int etat,String photo,int idU) {
         this.namecomp = namecomp;
         this.desccomp = desccomp;
         this.nbrmaxspec = nbrmaxspec;
@@ -144,6 +183,8 @@ public class competition {
         this.pricecomp = pricecomp;
         this.idcat = idcat;
         this.etat = etat;
+        this.photo=photo;
+        this.idU=idU;
     }
 
     public competition(String namecomp) {
@@ -152,7 +193,7 @@ public class competition {
 
  
 
-    public competition(String namecomp, String desccomp, int nbrmaxspec, String location, String startingdate, String endingdate, float pricecomp, int idcat, int etat) {
+    public competition(String namecomp, String desccomp, int nbrmaxspec, String location, String startingdate, String endingdate, float pricecomp, int idcat, int etat,String photo,int idU) {
         this.namecomp = namecomp;
         this.desccomp = desccomp;
         this.nbrmaxspec = nbrmaxspec;
@@ -162,6 +203,36 @@ public class competition {
         this.pricecomp = pricecomp;
         this.idcat = idcat;
         this.etat = etat;
+        this.photo=photo;
+        this.idU=idU;
+    }
+     public competition(String namecomp, String desccomp, int nbrmaxpar,int nbrmaxspec, String location, String startingdate, String endingdate, float pricecomp, int idcat) {
+        this.namecomp = namecomp;
+        this.desccomp = desccomp;
+        this.nbrmaxspec = nbrmaxspec;
+        this.nbrmaxpar=nbrmaxpar;
+        this.location = location;
+        this.startingdate = startingdate;
+        this.endingdate = endingdate;
+        this.pricecomp = pricecomp;
+        this.idcat = idcat;
+ 
+    }
+    
+    public competition(int  idcomp,String namecomp, String desccomp, int nbrmaxspec,int nbrmaxpar, String location, String startingdate, String endingdate, float pricecomp, int idcat, int etat,String photo,int idU) {
+        this.idcomp = idcomp;
+        this.namecomp = namecomp;
+        this.desccomp = desccomp;
+        this.nbrmaxspec = nbrmaxspec;
+         this.nbrmaxpar = nbrmaxpar;
+        this.location = location;
+        this.startingdate = startingdate;
+        this.endingdate = endingdate;
+        this.pricecomp = pricecomp;
+        this.idcat = idcat;
+        this.etat = etat;
+        this.photo = photo ;
+        this.idU=idU;
     }
 
     

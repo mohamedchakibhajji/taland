@@ -21,15 +21,15 @@ public class Event {
     private int etat_event;
     private int spec_max;
     private int idU;
-    
-    
+    private String photo;
+    private int number ;
     
     //java.sql.date date=new java.sql.date(new java.util.date().getTime());
 
     public Event() {
     }
 
-    public Event(int idEvent, String name, String description, String location, Date date, float price_event, int etat_event, int spec_max, int idU) {
+    public Event(int idEvent, String name, String description, String location, Date date, float price_event, int etat_event, int spec_max, int idU,String photo) {
         this.idEvent = idEvent;
         this.name = name;
         this.description = description;
@@ -39,6 +39,23 @@ public class Event {
         this.etat_event = etat_event;
         this.spec_max = spec_max;
         this.idU = idU;
+        this.photo= photo ;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public int getIdU() {
@@ -115,7 +132,7 @@ public class Event {
 
     @Override
     public String toString() {
-        return "Event{" + "idEvent=" + idEvent + ", name=" + name + ", description=" + description + ", location=" + location + ", date=" + date + ", price_event=" + price_event + ", etat_event=" + etat_event + ", spec_max=" + spec_max + ", idU=" + idU + '}';
+        return "Event{" + "idEvent=" + idEvent + ", name=" + name + ", description=" + description + ", location=" + location + ", date=" + date + ", price_event=" + price_event + ", etat_event=" + etat_event + ", spec_max=" + spec_max + ", idU=" + idU + ", photo=" + photo+ '}';
     }
 
 
