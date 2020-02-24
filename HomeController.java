@@ -7,11 +7,6 @@ package Controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -20,8 +15,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 //import javafx.scene.control.Alert;
 //import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -30,9 +23,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import static javax.swing.JOptionPane.showMessageDialog;
-import utils.MaConnection;
 
 /**
  * FXML Controller class
@@ -40,17 +30,6 @@ import utils.MaConnection;
  * @author acer
  */
 public class HomeController implements Initializable {
-     private Connection cnx;
-    private Statement stm;
-    private PreparedStatement pst;
-    private PreparedStatement pst1;
-    private ResultSet rs;
-
-    public HomeController() {
-        cnx = MaConnection.getInstance().getConnection();
-        
-
-    }
 
     @FXML
     private Pane navePane;
@@ -78,8 +57,6 @@ public class HomeController implements Initializable {
     private Button btnExit;
     @FXML
     private ImageView btnNotification;
-    @FXML
-    private Button btnprofil;
 
     /**
      * Initializes the controller class.
@@ -142,21 +119,13 @@ public class HomeController implements Initializable {
     }
 
     @FXML
-    private void btnLogoutAction(ActionEvent event) throws IOException, SQLException {
-        
-         String query = "update fos_user set status='not connected'";
-        
-                stm = cnx.createStatement();
-                
-
-                stm.executeUpdate(query);
+    private void btnLogoutAction(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/gui/Login.fxml"));
         bigAnchorPane.getChildren().setAll(pane);
     }
 
     @FXML
     private void btnExitAction(ActionEvent event) {
-        System.exit(0);
 //        Alert alert = new Alert(AlertType.CONFIRMATION);
 //        alert.setTitle("Confirmation Dialog");
 //        alert.setHeaderText("Exit application");
@@ -164,32 +133,13 @@ public class HomeController implements Initializable {
 //
 //        Optional<ButtonType> result = alert.showAndWait();
 //        if (result.get() == ButtonType.OK) {
-//           System.exit(0);
+System.exit(0);
 //        }
        
     }
 
     @FXML
     private void btnNotificationAction(MouseEvent event) {
-    }
-
-    @FXML
-    private void afficherprofil(ActionEvent event) throws IOException {
-        Stage stage = (Stage) bigAnchorPane.getScene().getWindow();
-        
-                System.out.println("redirect to acceuil");
-                
-            Parent root=FXMLLoader.load(getClass().getClassLoader().getResource("gui/afficherprofil.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-               
-      
-            //System.err.println(info);
-          
-            
-            
-            stage.show();
-            
     }
 
 }

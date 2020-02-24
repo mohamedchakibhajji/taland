@@ -7,7 +7,9 @@ package Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -15,6 +17,9 @@ import javafx.fxml.Initializable;
  * @author acer
  */
 public class DealsController implements Initializable {
+
+    @FXML
+    private Label label;
 
     /**
      * Initializes the controller class.
