@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.Format;
@@ -28,6 +29,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
+import org.controlsfx.control.textfield.TextFields;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -40,6 +42,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
@@ -55,6 +58,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import utils.Create_QR;
+
 /**
  * FXML Controller class
  *
@@ -117,6 +122,9 @@ public class CompetitionsController implements Initializable {
     private Button updatebutton;
     @FXML
     private ImageView imagedrag;
+    @FXML
+    private ScrollPane test;
+  
 
     /**
      * Initializes the controller class.
@@ -124,9 +132,12 @@ public class CompetitionsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
             Servicecompetition ps=new Servicecompetition();
+            test.setVisible(false);
+  photo.setText("C:\\Users\\chaki\\Desktop\\Taland - Copie\\image\\Collab_Website_image-1000x589_3.jpg");
  affichercomp(ps.affichercompetition());
      
     }    
+    
     
 public void affichercomp(List <competition> competitions)
 {
@@ -139,6 +150,8 @@ public void affichercomp(List <competition> competitions)
       
    nameevent.setVisible(false);
    descriptionevent.setVisible(false);
+   String[] centers = {"Ariana centre", "Béja center", "Ben Arous center", "Bizerte center", "Gabès center", "Gafsa center", "Jendouba center", "Kairouan center", "Kasserine center", "Kebili center", "Kef center", " Mahdia center", "Manouba center", "Medenine center", "Monastir center", "Nabeul center", "Sfax center", "SidiBouzid center", "Siliana center", "Sousse center", "Tataouine center", "Sousse center", "Tozeur center", "Tunis center"};
+   TextFields.bindAutoCompletion(locationevent, centers);
    locationevent.setVisible(false);
    datevent.setVisible(false);
    priceevent.setVisible(false);
@@ -146,7 +159,6 @@ public void affichercomp(List <competition> competitions)
    creer.setVisible(false);
    specnum1.setVisible(false);
    categorie.setVisible(false);
-    
    datecompetition2.setVisible(false);
    photoshop.setVisible(false);
    description.setVisible(false);
@@ -160,7 +172,7 @@ public void affichercomp(List <competition> competitions)
                postpane.setPrefHeight(256);
                postpane.setPrefWidth(200);
                Label username=new Label();
-            
+               
                Label date = new Label();
                username.setTextFill(Color.WHITE );
                date.setTextFill(Color.WHITE );
@@ -179,6 +191,7 @@ public void affichercomp(List <competition> competitions)
                back.setFitWidth(800);
                back.setOpacity(0.5);
                back.setImage(image2);
+               back.setStyle("-fx-border-radius: 40px 40px 0 0");
               Servicecompetitionuser seu = new Servicecompetitionuser();
                Button participer = new Button();
                Button spectate = new Button();
@@ -270,7 +283,7 @@ public void affichercomp(List <competition> competitions)
    locationevent.setVisible(true);
    locationevent.setText(current.getLocation());
    datevent.setVisible(true);
-   // ------------------------------------------------Year----------------------------------------------------
+  //  ------------------------------------------------Year----------------------------------------------------
        String startdate =current.getStartingdate();
    char y1 =  startdate.charAt(6);
 
@@ -284,13 +297,13 @@ public void affichercomp(List <competition> competitions)
     
     int aam = Integer.parseInt(year);
        
-// ------------------------------------------------month----------------------------------------------------
+ //------------------------------------------------month----------------------------------------------------
    char m1 =  startdate.charAt(3);
    char m2 =  startdate.charAt(4);
     String month = String.valueOf(Character.getNumericValue(m1))+String.valueOf(Character.getNumericValue(m2));
  int chhar = Integer.parseInt(month);
         
-// ------------------------------------------------day----------------------------------------------------
+ //------------------------------------------------day----------------------------------------------------
    char d1 =  startdate.charAt(0);
    char d2 =  startdate.charAt(1);
     String day = String.valueOf(Character.getNumericValue(d1))+String.valueOf(Character.getNumericValue(d2));
@@ -306,7 +319,7 @@ public void affichercomp(List <competition> competitions)
    categorie.setVisible(true);
    datecompetition2.setVisible(true);
          prix.setVisible(false);
-            // ------------------------------------------------Year----------------------------------------------------
+      //       ------------------------------------------------Year----------------------------------------------------
        String enddate=current.getEndingdate();
    char y12 =  enddate.charAt(6);
 
@@ -320,13 +333,13 @@ public void affichercomp(List <competition> competitions)
     
     int aam2 = Integer.parseInt(year2);
        
-// ------------------------------------------------month----------------------------------------------------
+ //------------------------------------------------month----------------------------------------------------
    char m12 =  enddate.charAt(3);
    char m22 =  enddate.charAt(4);
     String month2 = String.valueOf(Character.getNumericValue(m12))+String.valueOf(Character.getNumericValue(m22));
  int chhar2 = Integer.parseInt(month2);
         
-// ------------------------------------------------day----------------------------------------------------
+ //------------------------------------------------day----------------------------------------------------
    char d12 =  enddate.charAt(0);
    char d22 =  enddate.charAt(1);
     String day2 = String.valueOf(Character.getNumericValue(d12))+String.valueOf(Character.getNumericValue(d22));
@@ -403,6 +416,32 @@ public void affichercomp(List <competition> competitions)
                participer.setOnMouseExited(e -> participer.setTextFill(Color.DODGERBLUE) );
                
                 competitionuser c2=new competitionuser(current.getIdcomp(),20);
+                
+                         try {
+              int d = seu.dejaparticipespec(current.getIdcomp(),20);
+               if (d > 0 )
+                  {
+                      
+                       spectate.setTextFill(Color.BLUE);
+                     spectate.setText("I'll Go");   
+                     participer.setVisible(false);
+                      spectate.setMaxWidth(793);
+                       spectate.setOnMouseEntered(e ->{
+                   spectate.setTextFill(Color.WHITE);
+                   spectate.setText("I Won't");   
+                  
+                   spectate.setCursor(Cursor.HAND);
+                   
+               });
+               spectate.setOnMouseExited(e -> {spectate.setTextFill(Color.BLUE);
+                  spectate.setText("I'll Go");} );
+               
+
+                      
+                  }
+          } catch (Exception ex) {
+              Logger.getLogger(CompetitionsController.class.getName()).log(Level.SEVERE, null, ex);
+          }
                           
           try {
               int d = seu.dejaparticipe(current.getIdcomp(),20);
@@ -446,10 +485,112 @@ public void affichercomp(List <competition> competitions)
                });
                spectate.setOnMouseExited(e -> spectate.setTextFill(Color.DODGERBLUE) );
                
-                competitionuser c3=new competitionuser(current.getIdcomp(),20);
-                           Servicecompetitionuser seu1 = new Servicecompetitionuser();
+         
+               File file = new File(competitions.get(i).getPhoto());
+               
+               Image image = new Image(file.toURI().toString());
+               final ImageView postimage=new ImageView();
+               postimage.setLayoutX(50);
+               postimage.setLayoutY(0);
+               postimage.setFitHeight(150);
+               postimage.setFitWidth(150);
+               postimage.setStyle("-fx-border-radius: 40px 40px 0 0");
+               postimage.setImage(image);
+               date.setText(competitions.get(i).getStartingdate());
+               date.setPrefWidth(500);
+               date.setPrefHeight(30);
+               date.setLayoutX(230);
+               date.setLayoutY(80);
+               username.setLayoutX(230);
+               username.setLayoutY(0);
+               username.setPrefWidth(200);
+               username.setPrefHeight(30);
+          
+       
+               
+               
+               eventcontainer.getChildren().add(postpane);
+               spectate.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                   public void handle(MouseEvent e) {
+                   Create_QR.main("Nom", "Prenom", current.getNamecomp());
+                       try {
+                           competitionuser c2=new competitionuser(current.getIdcomp(),20);
+                           Servicecompetitionuser seu = new Servicecompetitionuser();
+                           seu.reserverplacespec(c2,current.getNamecomp());
+                           
+                          spectate.setText("I'll Go");
+                       participer.setText("");
+                       
+                       } catch (Exception ex) {
+                           System.out.println(ex.getMessage());
+                       }
+                  Servicecompetition se = new Servicecompetition();
+                              eventcontainer.getChildren().clear();
+        affichercomp(se.affichercompetition());
+                   }
+                   
+                   
+                   
+                   
+               });
+                   
+             participer.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                   public void handle(MouseEvent e) { 
+               
+                        try {
+                           competitionuser c2=new competitionuser(current.getIdcomp(),20);
+                           Servicecompetitionuser seu = new Servicecompetitionuser();
+                           seu.reserverplace(c2);
+                           
+                           eventcontainer.getChildren().clear();
+                          back.setLayoutX(50);
+                               back.setFitHeight(1500);
+                            back.setFitWidth(900);
+                           eventcontainer.getChildren().add(postpane);
+                       
+                       } catch (Exception ex) {
+                           System.out.println(ex.getMessage());
+                       }
+                        
+                   }});
+               
+            if  (participer.getText() == "Participated" ||  participer.getText() == "I Won't Go")
+               {
+                    
+                  spectate.setText("");
+                   numberspec.setVisible(true);
+                   number.setVisible(true);
+                    participer.setOnMouseExited(e -> {
+                        participer.setTextFill(Color.BLUE) ;
+                        participer.setText("Participated");
+                            });
+                     participer.setOnMouseEntered(e -> {
+                         participer.setText("I Won't Go") ;
+                             System.out.println("test");
+                             });
+                   participer.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                   public void handle(MouseEvent e) {
+            
+                 System.out.println("test12");
+                       seu.supprimerparticipation(current.getIdcomp(), 20);
+                        
+                          
+                   }
+                   
+                   
+                   
+                   
+               });
+               
+                   
+                   
+               }
+           
+             
+            
+                                    Servicecompetitionuser seu1 = new Servicecompetitionuser();
           try {
-              int d = seu.dejaparticipe(current.getIdcomp(),20);
+              int d = seu.dejaparticipespec(current.getIdcomp(),20);
                if (d > 0 )
                   {
                       
@@ -471,115 +612,8 @@ public void affichercomp(List <competition> competitions)
           } catch (Exception ex) {
               Logger.getLogger(CompetitionsController.class.getName()).log(Level.SEVERE, null, ex);
           }
-         
-               File file = new File(competitions.get(i).getPhoto());
-               
-               Image image = new Image(file.toURI().toString());
-               final ImageView postimage=new ImageView();
-               postimage.setLayoutX(50);
-               postimage.setLayoutY(0);
-               postimage.setFitHeight(150);
-               postimage.setFitWidth(150);
-               
-               postimage.setImage(image);
-               date.setText(competitions.get(i).getStartingdate());
-               date.setPrefWidth(500);
-               date.setPrefHeight(30);
-               date.setLayoutX(230);
-               date.setLayoutY(80);
-               username.setLayoutX(230);
-               username.setLayoutY(0);
-               username.setPrefWidth(200);
-               username.setPrefHeight(30);
-               username.setOnMouseClicked(e ->{
-                   JFXDialogLayout dialoglayout = new JFXDialogLayout();
-                   
-                   BoxBlur blur = new BoxBlur(10,10,10);
-                   JFXDialog dialog = new JFXDialog(stackpane , dialoglayout , JFXDialog.DialogTransition.TOP);
-                   stackpane.setEffect(null);
-                   pane.setEffect(blur);
-                   dialog.show();
-                   dialog.close();
-               });
-       
-               
-               
-               eventcontainer.getChildren().add(postpane);
-               spectate.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                   public void handle(MouseEvent e) {
-                   
-                       try {
-                           competitionuser c2=new competitionuser(current.getIdcomp(),20);
-                           Servicecompetitionuser seu = new Servicecompetitionuser();
-                           seu.reserverplacespec(c2,current.getNamecomp());
-                           
-                          spectate.setText("I'll Go");
-                       participer.setText("");
-                       
-                       } catch (Exception ex) {
-                           System.out.println(ex.getMessage());
-                       }
-                   }
-                   
-                   
-                   
-                   
-               });
-                   
-                participer.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                   public void handle(MouseEvent e) {
-                   
-                       try {
-                           competitionuser c2=new competitionuser(current.getIdcomp(),20);
-                           Servicecompetitionuser seu = new Servicecompetitionuser();
-                           seu.reserverplace(c2);
-                           
-                           eventcontainer.getChildren().clear();
-                          back.setLayoutX(50);
-                               back.setFitHeight(1500);
-                            back.setFitWidth(900);
-                           eventcontainer.getChildren().add(postpane);
-                       
-                       } catch (Exception ex) {
-                           System.out.println(ex.getMessage());
-                       }
-                   }
-                   
-                   
-                   
-                   
-               });
-               
-            if  (participer.getText() == "Participated" || participer.getText() == "I Won't" ||  participer.getText() == "I Won't Go")
-               {
-                    spectate.setVisible(false);
-                  spectate.setText("");
-                   numberspec.setVisible(true);
-                   number.setVisible(true);
-                    participer.setOnMouseExited(e -> {
-                        participer.setTextFill(Color.BLUE) ;
-                        participer.setText("Participated");
-                            });
-                     participer.setOnMouseEntered(e -> participer.setText("I Won't Go") );
-                   participer.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                   public void handle(MouseEvent e) {
-                
-                
-                       seu.supprimerparticipation(current.getIdcomp(), 20);
-                        
-                          
-                   }
-                   
-                   
-                   
-                   
-               });
-               
-                   
-                   
-               }
-           
-               if  (spectate.getText() == "I'll Go")
+            
+                if  (spectate.getText() == "I'll Go")
                {
                    participer.setVisible(false);
                    number.setVisible(false);
@@ -595,7 +629,9 @@ public void affichercomp(List <competition> competitions)
                    public void handle(MouseEvent e) {
                     spectate.setText("Spectate");
                        seu.supprimerparticipationspec(current.getIdcomp(), 20);
-                        
+                              eventcontainer.getChildren().clear();
+                              Servicecompetition se = new Servicecompetition();
+        affichercomp(se.affichercompetition());
                           
                    }
                    
@@ -607,9 +643,6 @@ public void affichercomp(List <competition> competitions)
                    
                    
                }
-            
-                    
-              
         
                username.setOnMouseEntered(e ->{
                    username.setTextFill(Color.DODGERBLUE);
@@ -623,34 +656,16 @@ public void affichercomp(List <competition> competitions)
                
                username.setOnMouseClicked(new EventHandler<MouseEvent>() {
                    public void handle(MouseEvent e) {
-               
-          
-                 
-                 eventcontainer.getChildren().clear();
-                          back.setLayoutX(50);
-                               back.setFitHeight(1500);
-                            back.setFitWidth(900);
-                              prix.setVisible(true);
-                                dateend.setVisible(true);
-                             description.setVisible(true);
-                             description.setText("Decsription :       " +current.getDesccomp());
-                             description.setLayoutX(200);
-                             description.setLayoutY(400);
-                              description.setMaxHeight(1800);
-                            description.setMaxWidth(1500);
-                            description.setTextFill(Color.DODGERBLUE);
-                            description.setUnderline(true);
-                             description.setStyle("-fx-font-size: 20px");
-                                 prix.setText("Price :       " +current.getPricecomp()+" DT");
-                             prix.setLayoutX(200);
-                             prix.setLayoutY(250);
-                              prix.setMaxHeight(1800);
-                            prix.setMaxWidth(1500);
-                            prix.setTextFill(Color.DODGERBLUE);
-                            prix.setUnderline(true);
-                             prix.setStyle("-fx-font-size: 40px");
-                           eventcontainer.getChildren().add(postpane);
-                  
+              eventcontainer.getChildren().clear();
+               Image image2 = new Image("uploads/983279.jpg");
+               final ImageView back=new ImageView();
+               back.setLayoutX(50);
+               back.setLayoutY(0);
+               back.setFitHeight(700);
+               back.setFitWidth(900);
+               back.setOpacity(0.5);
+               back.setImage(image2);
+              
                    }
                    
                    
@@ -658,7 +673,8 @@ public void affichercomp(List <competition> competitions)
                    
                });
                
-           
+            
+               
                
                postpane.getChildren().addAll(back,username,date,postimage,participer,number,spectate,numberspec,delete,update); 
                

@@ -50,7 +50,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-
+import animatefx.animation.*;
+import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
+import javafx.util.Duration;
 /**
  * FXML Controller class
  *
@@ -61,7 +65,7 @@ public class EventsController implements Initializable {
     @FXML
     private Label label;
     @FXML
-    private VBox eventcontainer;
+    private HBox eventcontainer;
     @FXML
     private Button buttonafficherajout;
     @FXML
@@ -90,8 +94,14 @@ public class EventsController implements Initializable {
    
     @FXML
     private Label photo1;
-  
+    @FXML
+    private Label btn;
+    @FXML
+    private Label btn1;
 
+   int position = 0 ; 
+   int pos = 0;
+   ImageView imageView = new ImageView();
     /**
      * Initializes the controller class.
      */
@@ -110,7 +120,7 @@ public class EventsController implements Initializable {
    priceevent.setVisible(false);
    specnum.setVisible(false);
    creer.setVisible(false);
-
+   afficher();
            List<Event> events;
         try {
             events = ps.getEvents();
@@ -127,17 +137,17 @@ public class EventsController implements Initializable {
                 username.setStyle("-fx-font-weight: bold");
                 username.setStyle("-fx-border-color : white");
                 username.setStyle("-fx-border-width : 0px 0px 2px 0px");
-                username.setStyle("-fx-font-size: 45px");
+                username.setStyle("-fx-font-size: 175px");
                 date.setStyle("-fx-font-weight: bold");
-                date.setStyle("-fx-font-size: 20px");
+                date.setStyle("-fx-font-size: 50px");
                 username.setText(events.get(i).getName());
                 
                   Image image2 = new Image("uploads/983279.jpg");
                final ImageView back=new ImageView();
-                back.setLayoutX(150);
-                back.setLayoutY(0);
-                back.setFitHeight(550);
-                back.setFitWidth(700);
+                back.setLayoutX(80);
+                back.setLayoutY(-40);
+                back.setFitHeight(650);
+                back.setFitWidth(800);
                 back.setOpacity(0.5);
                 back.setImage(image2);
                 
@@ -172,7 +182,7 @@ public class EventsController implements Initializable {
               {
                    participer.setText("Participated");
                             
-               participer.setLayoutX(790);
+               participer.setLayoutX(1300);
               participer.setMaxWidth(500);
               }
               participer.setBackground(Background.EMPTY);
@@ -193,14 +203,11 @@ public class EventsController implements Initializable {
              
               participer.setPrefWidth(150);
              
-               username.setOnMouseEntered(e ->{
-                  username.setTextFill(Color.DODGERBLUE);
-                  username.setCursor(Cursor.HAND);
-                      });
+          
                     participer.setOnMouseClicked(new EventHandler<MouseEvent>() {
                    public void handle(MouseEvent e) {
                    participer.setText("Participated");
-                    participer.setLayoutX(790);
+                    participer.setLayoutX(1090);
                      participer.setMaxWidth(790);
                        try {
                         EventUser c2=new EventUser(current.getIdEvent(),20);
@@ -226,70 +233,47 @@ public class EventsController implements Initializable {
                    }
                      );     
                }
-              username.setOnMouseExited(e -> username.setTextFill(Color.WHITE) );
-            
-             username.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                   public void handle(MouseEvent e) {
-                   
-                       try {
-                           System.out.println("afficher");
-                       } catch (Exception ex) {
-                           System.out.println(ex.getMessage());
-                       }
-                   }
-                      
-                          
 
-                   
-               });
-             
-    
            
                      File file = new File(events.get(i).getPhoto());
-                     
         Image image = new Image(file.toURI().toString());
                final ImageView postimage=new ImageView();
-                postimage.setLayoutX(220);
-                postimage.setLayoutY(30);
-                postimage.setFitHeight(450);
-                postimage.setFitWidth(600);
+                postimage.setLayoutX(80);
+                postimage.setLayoutY(-40);
+                postimage.setFitHeight(650);
+                postimage.setFitWidth(800);
                postimage.setStyle("-fx-border-radius: 20%");
                 postimage.setImage(image);
                 Format formatter = new SimpleDateFormat("yyyy-MM-dd");
                 String s = formatter.format(events.get(i).getDate());
-                date.setText(s);
+          
                 date.setPrefWidth(500);
                 date.setPrefHeight(30);
                 date.setLayoutX(230);
-                date.setLayoutY(80);
+                date.setLayoutY(230);
                 username.setLayoutX(230);
                 username.setLayoutY(0);
                 username.setPrefWidth(400);
                 username.setPrefHeight(30);  
                  number.setVisible(false);
-                 
+                 date.setVisible(false);
+                  System.out.println(date.getText());
                  back.setVisible(false);
+                  username.setVisible(false);
                      postimage.setOnMouseEntered(e ->{
+                         date.setVisible(true);
               number.setVisible(true);
                 back.setVisible(true);
+                username.setVisible(true);
           });
-                postimage.setOnMouseExited(e ->{
+                back.setOnMouseExited(e ->{
               number.setVisible(false);
-              
+              date.setVisible(false);
                back.setVisible(false);
+                username.setVisible(false);
           });
-                username.setOnMouseClicked(e ->{
-                    JFXDialogLayout dialoglayout = new JFXDialogLayout();
-          
-            BoxBlur blur = new BoxBlur(10,10,10);
-             JFXDialog dialog = new JFXDialog(stackpane , dialoglayout , JFXDialog.DialogTransition.TOP);
-              stackpane.setEffect(null);
-              pane.setEffect(blur);
-             dialog.show();
-             dialog.close();
-                      });
-                
-                postpane.getChildren().addAll(username,date,back,postimage,participer,number);
+ 
+                postpane.getChildren().addAll(postimage,back,username,date,participer,number);
                 System.out.println(events.get(i).getPrice_event());
                 eventcontainer.getChildren().add(postpane);
         } 
@@ -299,6 +283,94 @@ public class EventsController implements Initializable {
         }
     }    
 
+
+ public void afficher(){
+        ZoomInUp zoomInUp = new ZoomInUp(eventcontainer);
+            zoomInUp.play();
+        System.out.println("aaaaaaaaaaaaaaaaaaaaa");
+        for(int j=1;j<5;j++)
+        {
+            //Pane post = new Pane();
+            ImageView postbackground = new ImageView();
+            String path= "/uploads/"+j+".jpg";
+            Image image = new Image(path);
+            postbackground.setImage(image);
+            postbackground.setFitHeight(90);
+             postbackground.setFitWidth(90);
+            FadeIn fadeIn = new FadeIn(postbackground);
+            fadeIn.play();
+            fadeIn.setDelay(Duration.millis(50000));
+            eventcontainer.getChildren().add(postbackground);  
+        }
+        ScaleTransition st = new ScaleTransition(Duration.millis(1000), eventcontainer.getChildren().get(0));
+       st.setByX(1.5);
+       st.setByY(1.5);
+       st.play();
+        System.out.println("yoooooooooooooooooooooo");
+       
+        btn1.setDisable(true);
+    }
+    
+    
+    public void scaleforward (HBox eventcontainer,int i)
+           
+   {  
+       FadeTransition fade = new FadeTransition();  
+       fade.setDuration(Duration.millis(1000)); 
+        fade.setFromValue(10);  
+        fade.setToValue(0);  
+       fade.setNode(eventcontainer.getChildren().get(i-1)); 
+       fade.play();  
+       TranslateTransition sttrans = new TranslateTransition(Duration.millis(1000), eventcontainer.getChildren().get(i));
+       
+       ScaleTransition st = new ScaleTransition(Duration.millis(1000), eventcontainer.getChildren().get(i));
+       st.setByX(1.5);
+       st.setByY(1.5);
+        
+       TranslateTransition st1trans = new TranslateTransition(Duration.millis(1000), eventcontainer.getChildren().get(i-1));
+       
+       ScaleTransition st1 = new ScaleTransition(Duration.millis(1000), eventcontainer.getChildren().get(i-1));
+       st1.setByX(-1.5);
+       st1.setByY(-1.5);
+       st.play();
+       st1.play();
+   }
+   
+   public void scalebackwards (HBox eventcontainer,int i)
+           
+   {   
+       FadeTransition fade = new FadeTransition();  
+       fade.setDuration(Duration.millis(1000)); 
+        fade.setFromValue(0);  
+        fade.setToValue(10);  
+       fade.setNode(eventcontainer.getChildren().get(i-1)); 
+       fade.play();  
+       ScaleTransition st = new ScaleTransition(Duration.millis(1000), eventcontainer.getChildren().get(i-1));
+       st.setByX(1.5);
+       st.setByY(1.5);
+       ScaleTransition st1 = new ScaleTransition(Duration.millis(1000), eventcontainer.getChildren().get(i));
+       st1.setByX(-1.5);
+       st1.setByY(-1.5);
+       st.play();
+       st1.play();
+   }
+
+    private void btnclicked(ActionEvent event) {
+          btn1.setDisable(false);
+        TranslateTransition translate = new TranslateTransition(Duration.seconds(1),eventcontainer);
+        position=position-140;
+        
+        pos++;
+        if(pos>2){btn.setDisable(true);}
+        
+        System.out.println("eventcontainer position = "+position);
+        System.out.println("i= "+pos);
+           scaleforward(eventcontainer,pos);
+            translate.setToX(position);
+            translate.play();
+    }
+
+   
     @FXML
     private void afficherformulaire(ActionEvent event) {
          nameevent.setVisible(true);
@@ -367,6 +439,37 @@ public class EventsController implements Initializable {
             photo.setText(f.getAbsolutePath());
         }
     }
+
+    @FXML
+    private void btnclicked(MouseEvent event) {
+        btn1.setDisable(false);
+        TranslateTransition translate = new TranslateTransition(Duration.seconds(1),eventcontainer);
+        position=position-140;
+        
+        pos++;
+        if(pos>2){btn.setDisable(true);}
+        
+        System.out.println("eventcontainer position = "+position);
+        System.out.println("i= "+pos);
+           scaleforward(eventcontainer,pos);
+            translate.setToY(position);
+            translate.play();
+    }
+
+    @FXML
+    private void btn1clicked(MouseEvent event) {
+         if(pos<=3){btn.setDisable(false);}
+        TranslateTransition translate = new TranslateTransition(Duration.seconds(1),eventcontainer);
+        position=position+140;
+        translate.setToX(position);
+            translate.play();
+           scalebackwards(eventcontainer,pos);
+            pos--;
+            if(pos==0){btn1.setDisable(true);}
+            System.out.println("eventcontainer position = "+position);
+            System.out.println("i= "+pos);
+    }
+
 
 
   
