@@ -245,9 +245,6 @@ public class StatisticsController implements Initializable{
             
         }
         
-        
-        
-        
     }
 
     @FXML

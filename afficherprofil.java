@@ -120,7 +120,9 @@ public class afficherprofil implements Initializable {
 
             while (rs.next()) //  list.add(new Talentueux(rs.getString("Talent"),rs.getInt("NumTel"), rs.getString("Email"), rs.getString("DateNaissance")); //soit le nom de la colonne soit l'indice
             {
-            System.out.println(rs.getString("firstname"));
+                 System.out.println(rs.getString("firstname"));
+            
+
             // attempt to put it in a textfield
            lbfirstname.setText(rs.getString("firstname"));
            lbpassword.setText("***********");
