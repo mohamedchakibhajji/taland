@@ -5,15 +5,8 @@
  */
 package Controller;
 
-import Entity.user;
-import Services.ServiceUser;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -22,21 +15,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 //import javafx.scene.control.Alert;
 //import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 //import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import static javax.swing.JOptionPane.showMessageDialog;
-import org.controlsfx.control.Rating;
-import utils.MaConnection;
 
 /**
  * FXML Controller class
@@ -44,21 +30,6 @@ import utils.MaConnection;
  * @author acer
  */
 public class HomeController implements Initializable {
-     private Connection cnx;
-    private Statement stm;
-    private PreparedStatement pst;
-    private PreparedStatement pst1;
-    private ResultSet rs;
-    @FXML
-    private Button btnrateus;
-    @FXML
-    private Rating ratec;
-
-    public HomeController() {
-        cnx = MaConnection.getInstance().getConnection();
-        
-
-    }
 
     @FXML
     private Pane navePane;
@@ -85,21 +56,17 @@ public class HomeController implements Initializable {
     @FXML
     private Button btnExit;
     @FXML
-    private ImageView btnNotification;
+    private Button btnCompettions1;
     @FXML
-    private Button btnprofil;
+    private Button btnnotif;
+    
+   
 
     /**
      * Initializes the controller class.
      */
-    
- 
-    
-    
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("/////////////////////"+ServiceUser.loggedInUser);
         // TODO
         AnchorPane pane;
         try {
@@ -108,39 +75,6 @@ public class HomeController implements Initializable {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());;
         }
-        
-        ServiceUser su =new ServiceUser();
-         try {
-             int con=su.getconnecteduser();
-             System.out.println(con);
-              String req = "select rate from ratings where idu="+con;
-        try {
-           /* String[] args = null;
-            Webcamtest.main(args);*/
-            System.out.println("haya aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaad");
-            Statement stm = cnx.createStatement();
-            ResultSet rs = stm.executeQuery(req);
-
-            while (rs.next())
-            {
-                 
-                System.out.println("sadzefgrhstydjfuig");
-
-            // attempt to put it in a textfield
-           ratec.setRating(rs.getDouble("rate"));
-          
-           
-                }
-
-        } catch (SQLException ex) {
-            System.out.println("asadad");
-        
-        }
-         } catch (SQLException ex) {
-             System.out.println("asef");
-         }
-        
-       
 
     }
 
@@ -166,7 +100,7 @@ public class HomeController implements Initializable {
 
     @FXML
     private void btnDealsAction(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/gui/Deals.fxml"));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/gui/FXMLDocument.fxml"));
         mainPane.getChildren().setAll(pane);
     }
 
@@ -189,21 +123,13 @@ public class HomeController implements Initializable {
     }
 
     @FXML
-    private void btnLogoutAction(ActionEvent event) throws IOException, SQLException {
-        
-         String query = "update fos_user set status='not connected'";
-        
-                stm = cnx.createStatement();
-                
-
-                stm.executeUpdate(query);
+    private void btnLogoutAction(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/gui/Login.fxml"));
         bigAnchorPane.getChildren().setAll(pane);
     }
 
     @FXML
     private void btnExitAction(ActionEvent event) {
-        System.exit(0);
 //        Alert alert = new Alert(AlertType.CONFIRMATION);
 //        alert.setTitle("Confirmation Dialog");
 //        alert.setHeaderText("Exit application");
@@ -211,27 +137,17 @@ public class HomeController implements Initializable {
 //
 //        Optional<ButtonType> result = alert.showAndWait();
 //        if (result.get() == ButtonType.OK) {
-//           System.exit(0);
+System.exit(0);
 //        }
        
     }
 
     @FXML
-    private void btnNotificationAction(MouseEvent event) {
-    }
-
-    @FXML
-    private void afficherprofil(ActionEvent event) throws IOException {
-         AnchorPane pane = FXMLLoader.load(getClass().getResource("/gui/afficherprofil.fxml"));
-        mainPane.getChildren().setAll(pane);
-            
-    }
-
-    @FXML
-    private void rateusaction(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/gui/Rating.fxml"));
-        mainPane.getChildren().setAll(pane);
+    private void btnnotifaction(MouseEvent event) throws IOException {
+        
         
     }
+
+   
 
 }

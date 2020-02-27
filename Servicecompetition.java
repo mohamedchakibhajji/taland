@@ -6,6 +6,7 @@
 package Services;
 
 import Entity.competition;
+import java.awt.AWTException;
 import utils.MaConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,6 +18,7 @@ import static java.util.Collections.list;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import utils.Notification;
 
 /**
  *
@@ -41,7 +43,7 @@ private ResultSet rs2;
       cnx=MaConnection.getInstance().getConnection();
       
   }
-     public void ajoutercompetition(competition c)
+     public void ajoutercompetition(competition c) throws AWTException
   {  
         if( nameexiste( c.getNamecomp()) == 0)
         {        
@@ -69,6 +71,7 @@ private ResultSet rs2;
           
        
            pst1.executeUpdate();
+            Notification.main("Competition Ajouté", "Votre Compétition a été ajoutée avec succés");
         } catch (SQLException ex) {
             Logger.getLogger(Servicecompetition.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -287,7 +290,7 @@ return list;
  
    public void supprimercompetition(int id) 
     {
-        if(getcompetition(5).isEmpty()== true){
+        if(getcompetition(id).isEmpty()== true){
         System.out.println("Il N'existe Aucune Compétition Avec Cette ID ");
     } 
     else
@@ -318,16 +321,18 @@ return list;
      
     }      
      
-      public void modifiercompetition(int idcomp,String namecomp,String desccomp,int nbrmaxspec,int nbrmaxpar,String location,String startingdate,String endingdate,Float pricecomp,int idcat,int etat) throws SQLException
+      public void modifiercompetition(int idcomp,competition c) throws SQLException
     {
         
-        if ( nameexiste2( namecomp,idcomp) == 0)
+        if ( nameexiste2(c.getNamecomp(),idcomp) == 0)
         {
           
                                                                                                                                         
         try {  
-            if((namecomp!="")&&(desccomp!="")&& (nbrmaxspec!=0)&& (nbrmaxpar!=0)&&(location!="")&&(startingdate!="")&&(endingdate!="")&&(pricecomp!=0)&&(idcat!=0)&&(etat!=0))
-            {  String query="update competition set namecomp='"+namecomp+"',desccomp='"+desccomp+"',nbrmaxspec='"+nbrmaxspec+"',nbrmaxpar='"+nbrmaxpar+"',location='"+location+"',startingdate='"+startingdate+"',endingdate='"+endingdate+"',pricecomp='"+pricecomp+"',idcat='"+idcat+"',etat='"+etat+"' where competition.idcomp="+idcomp;
+            if((c.getNamecomp()!="")&&(c.getDesccomp()!="")&& (c.getNbrmaxspec()!=0)&& 
+                    (c.getNbrmaxpar()!=0)&&(c.getLocation()!="")&&(c.getStartingdate()!="")
+                    &&(c.getEndingdate()!="")&&(c.getPricecomp()!=0)&&(c.getIdcat()!=0)&&(c.getEtat()!=0))
+            {  String query="update competition set namecomp='"+c.getNamecomp()+"',desccomp='"+c.getDesccomp()+"',nbrmaxspec='"+c.getNbrmaxspec()+"',nbrmaxpar='"+c.getNbrmaxpar()+"',location='"+c.getLocation()+"',startingdate='"+c.getStartingdate()+"',endingdate='"+c.getEndingdate()+"',pricecomp='"+c.getPricecomp()+"',idcat='"+c.getIdcat()+"',etat='"+c.getEtat()+"' where competition.idcomp="+idcomp;
         st=cnx.createStatement();
            st.executeUpdate(query);
            
@@ -482,6 +487,34 @@ list.add(new competition(rs.getString("namecomp")));
          
         
          return list; 
+     } 
+       
+       public int getidcompetition(String nom)
+     {
+          int ok = 0 ;
+        
+          
+         String req="select  *  from competition where namecomp = '"+nom+"'";
+       try {
+            st=cnx.createStatement();
+            rs=st.executeQuery(req);
+       
+     while(rs.next())
+         
+
+       
+    { 
+               
+     ok= rs.getInt("idcomp");
+        
+    }
+  
+        } catch (SQLException ex) {
+            Logger.getLogger(Servicecompetition.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+        
+         return ok; 
      } 
        
       public int nombrecompetitienattente( )

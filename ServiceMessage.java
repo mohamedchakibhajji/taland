@@ -73,7 +73,7 @@ public class ServiceMessage implements IServiceMessage{
      while(rs.next())
     
        
-       System.out.println("Fromc"+rs.getInt("idU") +"  ---> TO :"+rs.getInt("idreceiver")+ " ====== " +  rs.getString("contenu") );
+       System.out.println("From: "+rs.getInt("idU") +"  ---> TO :"+rs.getInt("idreceiver")+ " ====== " +  rs.getString("contenu") );
  
       
   
@@ -82,4 +82,57 @@ public class ServiceMessage implements IServiceMessage{
         }
        
     }
+     
+     @Override
+     public int nombredealers(int idreceiver) throws SQLException{
+           try {    
+        {   
+            String id = "'"+idreceiver+"'";
+        String req="SELECT COUNT(DISTINCT idU) FROM message where idreceiver="+id;
+     
+            st=cnx.createStatement();
+           rs=st.executeQuery(req);
+            
+            
+           
+        } 
+          
+       
+           pst1.executeUpdate();
+        } catch (SQLException ex) {
+            
+        }
+           return rs;
+     }
+     
+     
+     public int nameexiste(String namecomp )
+    {
+         int i=0; 
+        String nom = "'"+namecomp+"'";
+       
+        String req="select  *  from competition where namecomp ="+nom;
+      try {
+           st=cnx.createStatement();
+           rs=st.executeQuery(req);
+      
+    while(rs.next())
+        
+
+      
+   { 
+              
+      i=i+1;
+       
+   }
+ 
+       } catch (SQLException ex) {
+           Logger.getLogger(Servicecompetition.class.getName()).log(Level.SEVERE, null, ex);
+       }
+        
+        return i;
+        
+    }
+     
+     
 }

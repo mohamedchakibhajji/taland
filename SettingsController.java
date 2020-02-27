@@ -5,9 +5,12 @@
  */
 package Controller;
 
+import taland.Taland;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Slider;
 
 /**
  * FXML Controller class
@@ -16,12 +19,16 @@ import javafx.fxml.Initializable;
  */
 public class SettingsController implements Initializable {
 
+    @FXML
+    private Slider volumeslider;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        //volumeslider.setValue(player.getVolume()*100);
     }    
     
 }

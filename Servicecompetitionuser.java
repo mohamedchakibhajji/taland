@@ -119,8 +119,8 @@ public class Servicecompetitionuser {
         {        
         try {
     {   
-              //  String[] args = null;
-       // mail.main(args);
+                String[] args = null;
+        mail.main(args);
         String req="insert into competitionuser (idcomp,idu,type) values(?,?,'participant')";
         String req2="Update competition Set nbrparticipant=nbrparticipant+1 where idcomp ="+c.getIdcomp();
         String req3="Select * from competition";

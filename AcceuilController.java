@@ -6,7 +6,6 @@
 package Controller;
 
 import Entity.user;
-import Services.ServiceUser;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -63,8 +62,12 @@ public class AcceuilController implements Initializable {
         
         
         
-        ServiceUser su =new ServiceUser();
-        su.signout();
+        String query = "update fos_user set status='not connected'";
+        
+                st = cnx.createStatement();
+                
+
+                st.executeUpdate(query);
                 
         
          Stage stage = (Stage) ap2.getScene().getWindow();
