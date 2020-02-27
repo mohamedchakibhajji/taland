@@ -9,7 +9,6 @@ import Entity.user;
 import Services.ServiceUser;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -31,10 +30,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import utils.MaConnection;
-import javafx.scene.image.ImageView;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-
 
 /**
  * FXML Controller class
@@ -42,20 +37,14 @@ import javafx.scene.media.MediaPlayer;
  * @author Amine
  */
 public class LoginController implements Initializable {
-   
-            
-            
-            
-            
-    
-    ImageView iv = new ImageView();
-    
      private Connection cnx;
     private Statement st;
     private PreparedStatement pst;
     private PreparedStatement pst1;
     private ResultSet rs;
     public static int test ;
+    @FXML
+    private Button btnsignup;
 
     public LoginController() {
         cnx = MaConnection.getInstance().getConnection();
@@ -64,10 +53,13 @@ public class LoginController implements Initializable {
     }
     
     
+   @FXML
     private AnchorPane ap;
 
+    @FXML
     private JFXPasswordField txtpassword;
 
+    @FXML
     private JFXTextField txtusername;
       @FXML
     private Button btnSigin;
@@ -88,6 +80,7 @@ public class LoginController implements Initializable {
          AnchorPane pane=FXMLLoader.load(getClass().getResource("/gui/Home.fxml"));
        bigAnchorPane.getChildren().setAll(pane);
     }
+    @FXML
     private void btnlogin(ActionEvent event) throws IOException, SQLException {
          System.out.println("aaa");
          if (txtusername.getText().equals("")&&txtpassword.getText().equals("")){
@@ -130,6 +123,7 @@ public class LoginController implements Initializable {
         
    
 
+    @FXML
     private void btnsignup(ActionEvent event) throws IOException {
         Stage stage = (Stage) ap.getScene().getWindow();
                 System.out.println("affichage des utulisateurs");

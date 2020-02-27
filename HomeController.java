@@ -56,11 +56,7 @@ public class HomeController implements Initializable {
     @FXML
     private Button btnExit;
     @FXML
-    private Button btnCompettions1;
-    @FXML
-    private Button btnnotif;
-    
-   
+    private ImageView btnNotification;
 
     /**
      * Initializes the controller class.
@@ -100,7 +96,7 @@ public class HomeController implements Initializable {
 
     @FXML
     private void btnDealsAction(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/gui/FXMLDocument.fxml"));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/gui/Deals.fxml"));
         mainPane.getChildren().setAll(pane);
     }
 
@@ -143,11 +139,7 @@ System.exit(0);
     }
 
     @FXML
-    private void btnnotifaction(MouseEvent event) throws IOException {
-        
-        
+    private void btnNotificationAction(MouseEvent event) {
     }
-
-   
 
 }
