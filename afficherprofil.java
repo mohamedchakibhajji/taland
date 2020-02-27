@@ -19,6 +19,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -26,7 +28,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import utils.Create_QR;
 import utils.MaConnection;
+import utils.cartepdf;
 import utils.webcam;
 
 /**
@@ -44,28 +49,9 @@ public class afficherprofil implements Initializable {
 
     @FXML
     private AnchorPane bigAnchorPane;
-    @FXML
-    private Pane navePane;
-    @FXML
-    private Button btnHome;
-    @FXML
-    private Button btnCompettions;
-    @FXML
-    private Button btnEvents;
-    @FXML
-    private Button btnDeals;
-    @FXML
-    private Button btnStore;
-    @FXML
-    private Button btnPosts;
-    @FXML
-    private Button btnSettings;
-    @FXML
-    private Button btnLogout;
     
     
 
-    @FXML
     private AnchorPane mainPane;
     @FXML
     private TextField txtusername;
@@ -77,8 +63,6 @@ public class afficherprofil implements Initializable {
     private TextField txtemail;
     @FXML
     private Button btnExit;
-    @FXML
-    private ImageView btnNotification;
     @FXML
     private TextField txtpassword;
     @FXML
@@ -103,6 +87,14 @@ public class afficherprofil implements Initializable {
     private Label lbbiography;
     @FXML
     private Button picturebtn;
+    @FXML
+    private Button btntalentcard;
+    @FXML
+    private Pane paneprofil;
+    @FXML
+    private Pane paneupdate;
+    @FXML
+    private Button btnupdateprofil;
     
       public afficherprofil() {
         cnx = MaConnection.getInstance().getConnection();
@@ -116,6 +108,7 @@ public class afficherprofil implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb){
+        paneupdate.setVisible(false);
     
         String req = "select * from fos_user where status='connected' ";
         try {
@@ -127,12 +120,10 @@ public class afficherprofil implements Initializable {
 
             while (rs.next()) //  list.add(new Talentueux(rs.getString("Talent"),rs.getInt("NumTel"), rs.getString("Email"), rs.getString("DateNaissance")); //soit le nom de la colonne soit l'indice
             {
-                 System.out.println(rs.getString("firstname"));
-            
-
+            System.out.println(rs.getString("firstname"));
             // attempt to put it in a textfield
            lbfirstname.setText(rs.getString("firstname"));
-           lbpassword.setText(rs.getString("password"));
+           lbpassword.setText("***********");
            lbemail.setText(rs.getString("email"));
            lbbiography.setText(rs.getString("biography"));
            lbbirthdate.setText(rs.getString("birthdate"));
@@ -149,51 +140,44 @@ public class afficherprofil implements Initializable {
         
     }    
 
-@FXML
     private void btnHomeAction(ActionEvent event) throws IOException {
+        paneprofil.setVisible(false);
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/gui/HomePage.fxml"));
         mainPane.getChildren().setAll(pane);
 
         //  mainPane.getChildren().setAll(FXMLLoader.load("Login.fxml"));
     }
 
-    @FXML
     private void btnCompetitionsAction(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/gui/Competitions.fxml"));
         mainPane.getChildren().setAll(pane);
     }
 
-    @FXML
     private void btnEventsAction(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/gui/Events.fxml"));
         mainPane.getChildren().setAll(pane);
     }
 
-    @FXML
     private void btnDealsAction(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/gui/Deals.fxml"));
         mainPane.getChildren().setAll(pane);
     }
 
-    @FXML
     private void btnStoreAction(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/gui/Store.fxml"));
         mainPane.getChildren().setAll(pane);
     }
 
-    @FXML
     private void btnPostsAction(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/gui/Posts.fxml"));
         mainPane.getChildren().setAll(pane);
     }
 
-    @FXML
     private void btnSettingsAction(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/gui/Settings.fxml"));
         mainPane.getChildren().setAll(pane);
     }
 
-    @FXML
     private void btnLogoutAction(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/gui/Login.fxml"));
         bigAnchorPane.getChildren().setAll(pane);
@@ -215,12 +199,12 @@ public class afficherprofil implements Initializable {
        
     }
 
-    @FXML
-    private void btnNotificationAction(MouseEvent event) {
-    }
 
     @FXML
     private void updateprofil(ActionEvent event) throws IOException {
+        
+      
+        
          System.err.println("modif");
         
         user p = new user();
@@ -251,8 +235,27 @@ public class afficherprofil implements Initializable {
 
     @FXML
     private void picture(ActionEvent event) throws IOException {
+        System.out.println("sadzfegrhtry");
          String[] args = null;
         webcam.main(args);
     }
-    
+
+    @FXML
+    private void exporttalentcard(ActionEvent event) throws IOException, Exception {
+         String[] args = null;
+        Create_QR.main(args);
+        webcam.main(args);
+        cartepdf.main(args);
+    }
+
+    @FXML
+    private void updateprofill(ActionEvent event) {
+        paneprofil.setVisible(false);
+        paneupdate.setVisible(true);
+    }
+
+
+  
+
+  
 }

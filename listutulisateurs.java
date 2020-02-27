@@ -33,6 +33,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import utils.pdfuser;
 
 /**
  *
@@ -69,13 +70,13 @@ public class listutulisateurs implements Initializable {
     @FXML
     private TableColumn<user, Integer> colid;
     @FXML
-    private TableColumn<user, String> colfirstname;
-    @FXML
-    private TableColumn<user, String> collastname;
-    @FXML
     private TableColumn<user, String> colusername;
     @FXML
     private TableColumn<user, String> colemail;
+    @FXML
+    private TableColumn<user, String> colfirstname;
+    @FXML
+    private TableColumn<user, String> collastname;
     @FXML
     private TableColumn<user, String> colbirthdate;
     @FXML
@@ -93,6 +94,8 @@ public class listutulisateurs implements Initializable {
     private TextField searchbar;
     @FXML
     private Button btnexportexcel;
+    @FXML
+    private Button btnexportpdf;
     
 
     /**
@@ -231,6 +234,14 @@ public class listutulisateurs implements Initializable {
        
 
         });
+        
+    }
+
+    @FXML
+    private void exportpdf(ActionEvent event) throws Exception {
+        String[] args = null;
+        pdfuser.main(args);
+       
         
     }
 

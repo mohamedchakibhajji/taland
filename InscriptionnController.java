@@ -84,6 +84,7 @@ public class InscriptionnController implements Initializable {
         ComboboxSexe.setItems(list);
         labelpane.setVisible(false);
         fermerpane.setVisible(false);
+        
     }    
 
     @FXML
@@ -158,9 +159,7 @@ public class InscriptionnController implements Initializable {
                 }
     }
         
-     //   else{
-           
-       // }
+   
         
         
     
